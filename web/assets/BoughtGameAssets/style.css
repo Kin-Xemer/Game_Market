@@ -1,0 +1,429 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-family: myfontnormal;
+  list-style: none;
+}
+
+@font-face {
+  font-family: myfonthard;
+  src: url(pacifico.woff);
+}
+
+@font-face {
+  font-family: myfontnormal;
+  src: url(ptsans.woff);
+}
+
+.col-1 {
+  width: 6.333333333%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-2 {
+  width: 14.66666667%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-3 {
+  width: 23%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-4 {
+  width: 31.33333333%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-5 {
+  width: 39.66666667%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-6 {
+  width: 48%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-7 {
+  width: 56.33333333%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-8 {
+  width: 56.33333333%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-9 {
+  width: 73%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-10 {
+  width: 81.33333333%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-11 {
+  width: 89.66666667%;
+  float: left;
+  margin: 0 1%;
+}
+
+.col-12 {
+  width: 98%;
+  float: left;
+  margin: 0 1%;
+}
+
+a {
+  text-decoration: none;
+}
+.game-main-title a,
+.botcol a {
+  border-radius: 2px;
+  border: none;
+  padding: 1px;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none !important;
+  color: #67c1f5 !important;
+  background: rgba(103, 193, 245, 0.2);
+}
+.game-main-title span,
+.botcol span {
+  padding: 0 15px;
+  font-size: 15px;
+  line-height: 30px;
+  color: dodgerblue;
+}
+.game-main-title a:hover,
+.botcol a:hover {
+  background-color: #65b3e0;
+}
+.game-main-title span:hover,
+.botcol span:hover {
+  color: white;
+}
+
+h2#gameTitle {
+  position: relative;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-weight: 400;
+  float: left;
+  margin: 10px 0;
+  width: 80%;
+  color: brown;
+}
+
+table#customers {
+  padding: 1%;
+  width: 100%;
+}
+div.leftcol {
+  width: 100%;
+  overflow: scroll;
+  max-height: 200px;
+  min-height: 200px;
+  float: left;
+}
+div.rightcol {
+  width: 60%;
+}
+#imageSource {
+  width: 150px;
+  height: 60px;
+  border: solid grey;
+  border-radius: 20px 0px 20px 0px;
+}
+div#gameShortDes {
+  overflow: scroll;
+  max-height: 140px;
+}
+
+.rightcol span {
+  font-weight: bold;
+}
+.botcol {
+  float: left;
+  width: 100%;
+  padding: 1%;
+  display: flex;
+  background-color: bisque;
+  justify-content: flex-end;
+}
+.game-box {
+  background: cornsilk;
+}
+.game-title-guide {
+  background: burlywood;
+}
+.game-title-guide a:hover {
+  color: revert;
+}
+.game-puchase {
+  width: 100%;
+  margin-top: 2%;
+}
+
+.game-price {
+  float: right;
+  padding: 1%;
+  text-align: right;
+}
+.game-purchase-box {
+  float: left;
+  width: 50%;
+  margin-top: 5%;
+  color: white;
+}
+.game-purchase-box span {
+  font-size: 25px;
+  color: black;
+}
+.game-purchase-box a {
+  display: inherit;
+  text-align: center;
+
+  background: green;
+  border: 2px;
+  border-radius: 5px;
+}
+.game-purchase-box a:hover {
+  background-color: rgb(14, 90, 24);
+  color: white;
+}
+.game-remove {
+  font-size: small;
+  color: rgb(63, 6, 44);
+}
+.game-remove:hover {
+  color: rgb(82, 8, 57);
+}
+.home-page {
+  float: right;
+  width: 40%;
+  border: 5px;
+}
+.home-page img {
+  width: 100%;
+  display: inline-block;
+  border-radius: 5px;
+  padding: 0px 2%;
+}
+div #footer {
+  background: linear-gradient(
+    rgba(54, 19, 19, 0.781),
+    rgba(22, 7, 7, 0.781),
+    rgba(54, 19, 19, 0.781)
+  );
+  min-height: 15vh;
+  position: relative;
+  width: 100%;
+  float: left;
+}
+
+.bot-footer {
+  display: block;
+  float: left;
+  margin-top: 10%;
+}
+div #footer footer span {
+  display: flex;
+  justify-content: center;
+  color: rgba(216, 207, 207, 0.829);
+}
+
+div #footer footer span a {
+  cursor: pointer;
+}
+.system-requirement-box {
+  display: inline-block;
+  width: 50%;
+  list-style: none;
+  margin-top: 5%;
+  max-height: 200px;
+  overflow: scroll;
+  padding-left: 1%;
+}
+
+/* .botcol a {
+    display: flex;
+    justify-content: flex-end;
+} */
+section.top-info {
+  background: rgb(41, 22, 22);
+  width: 100%;
+  float: left;
+  padding: 4px 10px;
+  padding-bottom: 25px;
+  position: fixed;
+  z-index: 100;
+}
+
+section.body-info {
+  float: left;
+  width: 100%;
+  position: relative;
+  padding-bottom: 25px;
+  padding: 0px 10px;
+  margin: 3% 4% auto auto;
+  top: 10vh;
+  padding: 0px 12%;
+}
+
+.column-info {
+  vertical-align: middle;
+}
+
+#more-info li {
+  display: inline-block;
+  padding: 10px;
+}
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+#entry-text {
+  width: 60%;
+  margin: 1rem auto;
+  max-width: 80%;
+  padding: 1rem;
+  float: left;
+}
+
+#entry-text p {
+  font-size: 1.5rem;
+  text-align: center;
+}
+#account {
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+#account a {
+  font-weight: bold;
+  color: blanchedalmond;
+  display: block;
+  text-align: center;
+}
+
+#account a:hover {
+  font-weight: bolder;
+  color: rgb(240, 198, 136);
+}
+#more-info li a {
+  color: burlywood;
+  font-size: medium;
+}
+
+#more-info li a:hover {
+  color: rgb(223, 190, 148);
+  font-size: medium;
+  font-weight: bold;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+  max-height: 100%;
+}
+
+button:focus {
+  outline: none;
+}
+
+header {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2.5rem;
+  background: #00329e;
+}
+
+button:hover,
+button:active {
+  background: #dfce95;
+  border-color: #e0cf94;
+  color: #c2190d;
+}
+
+.checked {
+  color: orange;
+}
+
+label {
+  font-weight: bold;
+  margin: 0.5rem 0;
+  color: #464646;
+}
+
+input {
+  font: inherit;
+  border: 1px solid #ccc;
+  padding: 0.1rem 0.2rem;
+  color: #383838;
+}
+
+input:focus {
+  outline: none;
+  background: #fff1c4;
+}
+
+.game-container {
+  float: left;
+  width: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #743939;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+  padding: 0px 0px 1px 0px;
+  z-index: 1;
+}
+.dropdown-content a:hover {
+  background-color: #bc4646;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    width: 40rem;
+    left: calc(50% - 20rem);
+  }
+}
+
+@keyframes fade-slide-in {
+  from {
+    transform: translateY(-5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

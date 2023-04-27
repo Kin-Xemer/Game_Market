@@ -1,0 +1,380 @@
+<%@page import="dtos.Category"%>
+<%@page import="daos.GameDAO"%>
+<%@page import="dtos.Game"%>
+<%@page import="java.util.ArrayList"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" />
+        <link rel="stylesheet" href="assets/MainPageAssets/style.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+            />
+        <title>Game Steam</title>
+    </head>
+
+    <body style="background-image: url(img/bg-body.png);">
+
+        <div id="backdrop"></div>
+        <div class="modal" id="choices__modal">
+            <h2 class="modal__title">My Game</h2>
+            <form class="choices__box">
+                <input type="button" id="updateBtn" value="UPDATE">
+                <p>OR</p>
+                <input type="button" value="DELETE" id="deleteBtn">
+            </form>
+        </div>
+        <div class="modal card" id="add-modal">
+            <div class="modal__content">
+                <label for="gameId">Game ID</label>
+                <input type="text" name="gameId" id="gameId" required/>
+
+                <label for="title">Game Title</label>
+                <input type="text" name="title" id="title" required/>
+
+                <label for="image-url">Image URL</label>
+                <input type="file" name="image-url" id="image_url" required style="border:none" value=""/>
+  
+                
+                <label for="rating">Your Rating</label>
+                <input type="number" step="1" max="5" min="1" name="rating" id="rating" required/>
+
+                <label for="releaseDate">release Date</label>
+                <input type="date" name="releaseDate" id="releaseDate" required/>
+
+                <label for="publisherId">publisher ID</label>
+                <input type="text" name="publisherId" id="publisherId" required/>
+
+                <label for="developerId">Developer ID</label>
+                <input type="text" name="developerId" id="developerId" required/>
+
+                <label for="price">Price</label>
+                <input type="number" name="price" id="price" required/>
+
+                <label for="gameType">Type</label>
+                <select id="gameType" name="type">
+                    <option class="type">Action</option>
+                    <option class="type">Adventure</option>
+                    <option class="type">Sport</option>
+                    <option class="type">Moba</option>
+                    <option class="type">FPS</option>
+                </select>
+            </div>
+            <div class="modal__actions">
+                <button class="btn btn--passive">Cancel</button>
+                <button class="btn btn--success">Add</button>
+            </div>
+        </div>
+        <div class="modal card" id="update-modal">
+            <h2 class="modal__title">Update</h2>
+            <div class="modal__content">
+
+                <label for="gameId" readonly>Game ID</label>
+                <input type="text" name="gameId" id="gameId" required/>
+
+                <label for="title">Game Title</label>
+                <input type="text" name="title" id="title" required/>
+
+                <label for="image-url">Image URL</label>
+                <input type="file" name="image-url" id="image_url" required style="border:none"/>
+
+                <label for="rating">Your Rating</label>
+                <input type="number" step="1" max="5" min="1" name="rating" id="rating" required/>
+
+                <label for="releaseDate">Release Date</label>
+                <input type="date" name="releaseDate" id="releaseDate" required/>
+
+                <label for="publisherId">Publisher ID</label>
+                <input type="text" name="publisherId" id="publisherId" required/>
+
+                <label for="developerId">Developer ID</label>
+                <input type="text" name="developerId" id="developerId" required/>
+
+                <label for="price">Price</label>
+                <input type="number" name="price" id="price" required/>
+
+                <label for="gameType">Type</label>
+                <select id="gameType" name="type">
+                    <option class="type">Action</option>
+                    <option class="type">Adventure</option>
+                    <option class="type">Sport</option>
+                    <option class="type">Moba</option>
+                    <option class="type">FPS</option>
+                </select>
+            </div>
+            <div class="modal__actions">
+                <button class="btn btn--passive">Cancel</button>
+                <button class="btn btn--success">Update</button>
+            </div>
+        </div>
+        <div class="modal card" id="delete-modal">
+            <h2 class="modal__title">Are you sure?</h2>
+            <p class="modal__content">
+                Are you sure you want to delete this item? This action can't be made undone!
+            </p>
+            <div class="modal__actions">
+                <button class="btn btn--passive">No (Cancel)</button>
+                <button class="btn btn--danger">Yes</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <section class="top-info menu">
+                <div class="head">
+                    <div class="col-6">
+                        <ul id="more-info">
+                            <li><a href="">Help</a></li>
+                            <li><a href="">About us</a></li>
+                            <li><a href="">Friends</a></li>
+                        </ul>
+                    </div> 
+
+                    <%
+                        if (session != null) {
+                            String username = (String) session.getAttribute("username");
+                            if (username != null) {
+                    %>
+
+                    <div class="col-6">
+
+
+                        <div id="account"><a href="">Welcom, <%=username%></a> &emsp;&emsp;<a href="MainServlet?action=logout">Logout</a></div>
+
+
+                        <%}
+                            if (username == null) {%>
+                        <div id="account"><a href="MainServlet?action=login">Your Account</a></div>
+                        <%}%>
+
+                    </div>
+            </section>
+            <section class="body-info">
+                <div class="column-info left">
+                    <div class="col-3">
+                        <span class="left-info">GAME MARKET</span>
+
+                    </div>
+                </div>
+                <div class="column-info right" >
+                    <div id="entry-text" class="col-12 card">
+                        <p>WELCOME GAMERS</p>
+                        <div class="addBtn boxContainer">
+                            <button class="Add-game">ADD your GAME</button>
+                        </div>
+                        <div class="search-box">
+                            <button type="submit" id="searchBtn">
+                                <i class="fa fa-search"></i></button
+                            ><input
+                                type="text"
+                                id="searchPlace"
+                                class="search"
+                                placeholder="Search-here"
+                                />
+                        </div>
+                    </div>
+                    <div class="categories boxContainer">
+                        <form action="MainServlet?action=filter" name="filter" class="gameTypeCate">
+                            <%    ArrayList<Game> listgame = new ArrayList<Game>();
+                                ArrayList<Category> listcate = new ArrayList<Category>();
+                                GameDAO game = new GameDAO();
+                                listcate = game.getCategory();
+                                for (int i = 0; i < listcate.size(); i++) {
+                            %>        
+                            <button type="submit" class="categories" name="type" value="<%=listcate.get(i).getCateType()%>"><%=listcate.get(i).getCateType()%></button>
+                            <%}%>
+                            <button type="submit" class="categories" name="type" value="All">SHOW ALL</button>
+                        </form>
+                    </div>
+                    <div class="game-container">
+                        <%
+                            String type = request.getParameter("type");
+                        %>
+                        <% if (type == null || type.equals("All")) {
+                                listgame = game.getAllGame();
+                            } else {
+                                listgame = game.getGamesByType(type);
+                            }%>
+                        <% for (int i = 0; i < listgame.size(); i++) {
+                        %>
+
+
+                        <div class="game-list">
+                            <div class="game-list-info">
+                                <a href="" class="tab_item app_tracked">
+                                    <div class="tab_item_cap">
+                                        <img src="<%= listgame.get(i).getImgURL()%>" alt="" class="tab_item_cap_img" style="width:184px; height: 69px">
+                                    </div>
+                                    <div class="discount_block tab_item_discount no_discount">
+                                        <div class="discount_prices">
+                                            <div class="discount_final"><%=listgame.get(i).getPrice()%> $</div>
+                                            <!--Game Prices-->
+                                        </div>
+                                    </div>
+
+
+                                    <div class="tab_item_content">
+                                        <div class="tab_item_name"><%=listgame.get(i).getGameName()%>(<%=listgame.get(i).getUsername()%>)</div>
+                                        <!--Game Name-->
+                                        <div class="tab_item_details">
+                                            <%  for (int star = 0; star < listgame.get(i).getRating(); star++) {%>
+
+                                            <span class="fa fa-star checked"></span>
+                                            <%}%>
+                                            <%for (int rate = 0; rate < 5 - listgame.get(i).getRating(); rate++) {%>
+                                            <span class="fa fa-star"></span>
+                                            <%}%>
+                                            <!--Rating-->
+                                            <div class="tag_item_top_tags">
+                                                <span class="top_tag"><%= game.getTypeByID(listgame.get(i).getCategoryID())%></span>
+                                                <!--Game type-->
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div style="clear: both;"></div>
+                                </a>
+                            </div>
+                            <div class="game-list-event">
+                                <%if (username == null) {%>
+
+                                <!--<button class="edit-icon" style="background:none; border:none; cursor:pointer" id="editIcon"><i class="fa fa-edit"  style='font-size:24px'></i></button>-->
+                                <a href="LoginPage.jsp"><button class="addToCart" name="addToCart">ADD TO CART</button></a>
+
+                                <%} else if (username.compareTo(listgame.get(i).getUsername()) != 0 && username != null) {%>
+                                <button class="addToCart" name="addToCart">ADD TO CART</button> 
+                                <%} else {%>
+                                <button class="edit-icon" style="background:none; border:none; cursor:pointer" id="editIcon"><i class="fa fa-edit"  style='font-size:24px'></i></button>
+                                    <%  }
+                                    %>
+                            </div>
+                        </div>
+
+                        <%}
+
+                            }
+
+                        %>
+                    </div>
+                    <div class="pagination col-6">
+                        <a href="MainServlet?page=previous&action=paging">&laquo;</a>
+                        <a href="MainServlet?page=1&action=paging">1</a>
+                        <a href="MainSerlvet?page=2&action=paging">2</a>
+                        <a href="MainSerlvet?page=3&action=paging">3</a>
+                        <a href="MainSerlvet?page=4&action=paging">4</a>
+                        <a href="MainSerlvet?page=5&action=paging">5</a>
+                        <a href="MainSerlvet?page=6&action=paging">6</a>
+                        <a href="MainServlet?page=next&action=paging">&raquo;</a>
+                    </div> 
+                </div>
+            </section>
+        </div>
+
+        <div class="col-12" style="background-image: url(img/maxresdefault.jpg);">
+            <div id="footer">
+                <div class="footer-content">
+                    <footer>
+                        <span>Trieu Thanh Dat-SE150136</span>
+                        <span>contact: 0347185920</span>
+                        <span><a>trieuthanhdat12345@gmail.com</a></span>
+                        <span>Nguyen Manh Kien-SE130280</span>
+                        <span>contact: 0347647902</span>
+                        <span><a>nguyenmanhkien@gmail.com</a></span>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        const addModal = document.getElementById("add-modal");
+        const startAddButton = document.querySelector("#entry-text button");
+        const backdrop = document.getElementById("backdrop");
+        const cancelAddButton = addModal.querySelector(".btn--passive");
+        const confirmAddButton = cancelAddButton.nextElementSibling;
+        const userInputs = addModal.querySelectorAll("input");
+        const entryTextSection = document.getElementById("entry-text");
+        const deleteModal = document.getElementById("delete-modal");
+        const choicesModal = document.getElementById("choices__modal");
+        const updateModal = document.getElementById("update-modal");
+        const cancelUpdateButton = updateModal.querySelector(".btn--passive");
+
+        const editIcon = document.querySelectorAll(".game-list-event .edit-icon");
+
+        const updateBtn = document.getElementById("updateBtn");
+        const deleteBtn = document.getElementById("deleteBtn");
+
+        const closeAddModal = () => {
+            addModal.classList.remove("visible");
+        };
+        const showAddModal = () => {
+            addModal.classList.add("visible");
+            toggleBackdrop();
+        };
+        const showChoicesModal = () => {
+            choicesModal.classList.add("visible");
+            toggleBackdrop();
+            updateBtn.addEventListener("click", showUpdateModal);
+        };
+        const closeChoicesModal = () => {
+            choicesModal.classList.remove("visible");
+        };
+        const showUpdateModal = () => {
+            updateModal.classList.add("visible");
+        };
+        const closeUpdateModal = () => {
+            updateModal.classList.remove("visible");
+        };
+        const closeDeletionModal = () => {
+            toggleBackdrop();
+            deleteModal.classList.remove("visible");
+        };
+
+        const clearInput = () => {
+            for (const usrInput of userInputs) {
+                usrInput.value = "";
+            }
+        };
+        const toggleBackdrop = () => {
+            backdrop.classList.toggle("visible");
+        };
+        const backdropClickHandler = () => {
+            closeAddModal();
+            closeDeletionModal();
+            clearInput();
+            closeChoicesModal();
+            closeUpdateModal();
+        };
+        const cancelAddHandler = () => {
+            closeAddModal();
+            toggleBackdrop();
+            clearInput();
+        };
+        const cancelUpdateHandler = () => {
+            closeUpdateModal();
+            closeChoicesModal();
+            toggleBackdrop();
+            clearInput();
+        };
+
+        startAddButton.addEventListener("click", showAddModal);
+        backdrop.addEventListener("click", backdropClickHandler);
+        cancelAddButton.addEventListener("click", cancelAddHandler);
+        // confirmAddButton.addEventListener('click', addHandler);
+        editIcon.forEach((element) => {
+            element.addEventListener("click", showChoicesModal);
+        });
+        cancelUpdateButton.addEventListener("click", cancelUpdateHandler);
+    </script>
+
+</html>
